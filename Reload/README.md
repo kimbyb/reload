@@ -58,12 +58,12 @@ Navigate to ```/api/weather``` to see the UI render
 
 ### P0 — Multi-File & Dependency Changes
 
-| ID    | Scenario                                  | File(s)                                  | Change                                                | Expected Result                                                                                                                 |
-|-------|-------------------------------------------| ---------------------------------------- |-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| HR-10 | Controller + service change ////save all  | `WeatherController.cs`, `TimeService.cs` | Modify both files before save                         | Both changes applied consistently _PS: Apply changes on second file does not update also first_                                 |
-| HR-11 | Interface contract change                 | `ITimeService.cs`                        | Modify method signature                               | Reload fails or restart required; clear feedback                                                                                |
-| HR-12 | Method rename                             | `TimeService.cs`                         | Change `GetMessage()`  tp `GetMessage(string prefix)` | Error. Message   _ITimeService.cs(5, 23): [ENC0009] Updating the type of method requires restarting the application._ displayed |
-| HR-13 | Cross-file consistency                    | Multiple                                 | Change dependent code                                 | No partial or stale behavior                                                                                                    |
+| ID    | Scenario                      | File(s)                                  | Change                                                | Expected Result                                                                                                                |
+|-------|-------------------------------| ---------------------------------------- |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| HR-10 | Controller + service change   | `WeatherController.cs`, `TimeService.cs` | Modify both files before save                         | Both changes applied consistently _                                                                                            |
+| HR-11 | Interface contract change     | `ITimeService.cs`                        | Modify method signature                               | Reload fails or restart required; clear feedback                                                                               |
+| HR-12 | Method rename                 | `TimeService.cs`                         | Change `GetMessage()`  tp `GetMessage(string prefix)` | Error. Message   _ITimeService.cs(5, 23): [ENC0009] Updating the type of method requires restarting the application._ displayed |
+| HR-13 | Cross-file consistency        | Multiple                                 | Change dependent code                                 | No partial or stale behavior                                                                                                   |
 
 
 ###  P1 — Stability & Recovery
