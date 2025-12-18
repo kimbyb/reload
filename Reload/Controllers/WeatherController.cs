@@ -24,10 +24,7 @@ public class WeatherController : ControllerBase
         // {
         //     return $"Even second - {_timeService.GetMessage()}";
         // }
-        //
         // return $"Odd second - {_timeService.GetMessage()}";
-        
-        return $"Weather API response - {_timeService.GetMessage()}";
         
         //with generic
         //return _calculator.Echo($"Weather API response - {_timeService.GetMessage()}");
@@ -35,9 +32,12 @@ public class WeatherController : ControllerBase
         //with lambdas
         //var result = _lambdaProcessor.Process(5, x => x * 2);
         //return $"Lambda result: {result}";
+        
+        //default
+        return $"Weather API response - {_timeService.GetMessage()}";
     }
     
- //   response type HR-24
+     //  response type HR-24
      // [HttpGet]
      // public IActionResult Get()
      // {
@@ -54,6 +54,4 @@ public class WeatherController : ControllerBase
     // {
     //     return "v2";
     // }
-
-   // }
 }
