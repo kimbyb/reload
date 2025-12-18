@@ -8,6 +8,8 @@ namespace Reload.Controllers;
 public class WeatherController : ControllerBase
 {
     private readonly ITimeService _timeService;
+    private readonly GenericCalculator<string> _calculator = new();
+    private readonly LambdaProcessor _lambdaProcessor = new();
 
     public WeatherController(ITimeService timeService)
     {
@@ -27,8 +29,13 @@ public class WeatherController : ControllerBase
         
         return $"Weather API response - {_timeService.GetMessage()}";
         
+        //with generic
+        //return _calculator.Echo($"Weather API response - {_timeService.GetMessage()}");
         
-    // }
+        //with lambdas
+        //var result = _lambdaProcessor.Process(5, x => x * 2);
+        //return $"Lambda result: {result}";
+    }
     
  //   response type HR-24
      // [HttpGet]
@@ -48,5 +55,5 @@ public class WeatherController : ControllerBase
     //     return "v2";
     // }
 
-    }
+   // }
 }

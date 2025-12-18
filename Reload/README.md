@@ -96,24 +96,24 @@ Navigate to ```/api/weather``` to see the UI render
 
 ### P1 — Generics 
 
-| ID    | Scenario                        | File (Code needs to be added) | Change Description                             | Expected Result                          |
-|-------| ------------------------------- |-------------------------------| ---------------------------------------------- |------------------------------------------|
-| HR-25 | Generic method body change      | Any service/class             | Modify logic inside a generic method           | Change applied via Hot Reload            |
-| HR-26 | Generic type parameter rename   | Any generic class             | Rename generic type parameter (`T` → `TValue`) | Restart needed. Message displayed        |
-| HR-27 | Add generic constraint          | Generic class                 | Add constraint (e.g. `where T : class`)        | Restart required. Message displayed      |
-| HR-28 | Remove generic constraint       | Generic class                 | Remove existing constraint                     | Restart required, no crash               |
-| HR-29 | Change generic method signature | Generic method                | Modify generic parameters or return type       | Restart required. Message displayed      |
-| HR-30  | Generic usage change            | Consumer code                 | Change how generic method/type is instantiated | Change applied, see change (if visible)  |
+| ID    | Scenario                        | File                    | Change Description                             | Expected Result                          |
+|-------| ------------------------------- |-------------------------| ---------------------------------------------- |------------------------------------------|
+| HR-25 | Generic method body change      | `WeatherController.cs`  | Modify logic inside a generic method           | Change applied via Hot Reload            |
+| HR-26 | Generic type parameter rename   | `GenericCalculator.cs`  | Rename generic type parameter (`T` → `TValue`) | Restart needed. Message displayed        |
+| HR-27 | Add generic constraint          | `GenericCalculator.cs`  | Add constraint (e.g. `where T : class`)        | Restart required. Message displayed      |
+| HR-28 | Remove generic constraint       | `GenericCalculator.cs`  | Remove existing constraint                     | Restart required, no crash               |
+| HR-29 | Change generic method signature | `WeatherController.cs`  | Modify generic parameters or return type       | Restart required. Message displayed      |
+| HR-30  | Generic usage change            | Consumer code           | Change how generic method/type is instantiated | Change applied, see change (if visible)  |
 
 ### P1 — Lambdas 
 
-| ID    | Scenario                             | File (Code needs to be added) | Change Description               | Expected Result                                        |
-|-------| ------------------------------------ |-------------------------------| -------------------------------- |--------------------------------------------------------|
-| HR-31 | Lambda body logic change             | Any class                     | Modify lambda expression logic   | Change applied via Hot Reload, see change (if visible) |
-| HR-32 | Replace lambda with method reference | Any class                     | Convert lambda to named method   | Restart needed. Message displayed                      |
-| HR-33 | Lambda capture change                | Any class                     | Modify captured variables        | Change applied                                         |
-| HR-34 | Add lambda parameter                 | Any class                     | Modify lambda parameter list     | Restart needed. Message displayed   |
-| HR-35 | Change lambda return type            | Any class                     | Modify inferred return type      | Restart needed. Message displayed        |
+| ID    | Scenario                             | File                   | Change Description               | Expected Result                                        |
+|-------| ------------------------------------ |------------------------| -------------------------------- |--------------------------------------------------------|
+| HR-31 | Lambda body logic change             | `WeatherController.cs` | Modify lambda expression logic   | Change applied via Hot Reload, see change (if visible) |
+| HR-32 | Replace lambda with method reference | `WeatherController.cs` | Convert lambda to named method   | Restart needed. Message displayed                      |
+| HR-33 | Lambda capture change                | `LambdaProcessor.cs`   | Modify captured variables        | Change applied                                         |
+| HR-34 | Add lambda parameter                 | `LambdaProcessor.cs`   | Modify lambda parameter list     | Restart needed. Message displayed   |
+| HR-35 | Change lambda return type            | `LambdaProcessor.cs`   | Modify inferred return type      | Restart needed. Message displayed        |
 
 ###  P2 — IDE Feedback & Developer Experience
 
