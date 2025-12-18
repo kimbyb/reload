@@ -54,12 +54,12 @@ Navigate to ```/api/weather``` to see the UI render
 
 ### P0 — Multi-File & Dependency Changes
 
-| ID    | Scenario                      | File(s)                                  | Change                                                | Expected Result                                                                                                                |
-|-------|-------------------------------| ---------------------------------------- |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| HR-09 | Controller + service change   | `WeatherController.cs`, `TimeService.cs` | Modify both files before save                         | Both changes applied consistently _                                                                                            |
-| HR-10 | Interface contract change     | `ITimeService.cs`                        | Modify method signature                               | Reload fails or restart required; clear feedback                                                                               |
+| ID    | Scenario                      | File(s)                                  | Change                                                | Expected Result                                                                                                               |
+|-------|-------------------------------| ---------------------------------------- |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| HR-09 | Controller + service change   | `WeatherController.cs`, `TimeService.cs` | Modify both files before save                         | Both changes applied consistently                                                                                             |
+| HR-10 | Interface contract change     | `ITimeService.cs`                        | Modify method signature                               | Reload fails or restart required; clear feedback                                                                              |
 | HR-11 | Method rename                 | `TimeService.cs`                         | Change `GetMessage()`  tp `GetMessage(string prefix)` | Error. Message   _ITimeService.cs(5, 23): [ENC0009] Updating the type of method requires restarting the application._ displayed |
-| HR-12 | Cross-file consistency        | Multiple                                 | Change dependent code                                 | No partial or stale behavior                                                                                                   |
+| HR-12 | Cross-file consistency        | Multiple                                 | Change dependent code                                 | No partial or stale behavior                                                                                                  |
 
 
 ###  P1 — Stability & Recovery

@@ -16,6 +16,7 @@ public class WeatherController : ControllerBase
         _timeService = timeService;
     }
 
+    //default
     [HttpGet]
     public string Get()
     {
