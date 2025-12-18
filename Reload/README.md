@@ -36,13 +36,13 @@ Navigate to ```/api/weather``` to see the UI render
 ## Test Cases
 ### P0 — Core Hot Reload Functionality
 
-| ID    | Scenario                    | File                   | Change                                                             | Expected Result                                                            |
-|-------| --------------------------- | ---------------------- |--------------------------------------------------------------------|----------------------------------------------------------------------------|
-| HR-01 | Method body text change     | `WeatherController.cs` | Change return string                                               | Change applied immediately without restart; browser refresh shows new text |
-| HR-02 | Logic change in controller  | `WeatherController.cs` | Uncomment Condiitonal logic                                        | New logic executed immediately; no state loss                              |
-| HR-03 | Service method logic change | `TimeService.cs`       | Modify `GetMessage()` implementation                               | Updated service logic reflected immediately                                |
-| HR-04 | Route change                | `WeatherController.cs` | Change `[Route("api/weather")]` value to `[Route("api/weather1")]` | Old link is unavailable, new link renders                                  |
-| HR-05 | Multiple rapid edits        | `WeatherController.cs` | Several quick saves                                                | Hot Reload triggers consistently; no duplicate or missed reloads           |
+| ID    | Scenario                    | File                   | Change                                                             | Expected Result                                                            | Comments     |
+|-------| --------------------------- | ---------------------- |--------------------------------------------------------------------|----------------------------------------------------------------------------|--------------|
+| HR-01 | Method body text change     | `WeatherController.cs` | Change return string                                               | Change applied immediately without restart; browser refresh shows new text |              |
+| HR-02 | Logic change in controller  | `WeatherController.cs` | Uncomment Condiitonal logic                                        | New logic executed immediately; no state loss                              |              |
+| HR-03 | Service method logic change | `TimeService.cs`       | Modify `GetMessage()` implementation                               | Updated service logic reflected immediately                                |              |
+| HR-04 | Route change                | `WeatherController.cs` | Change `[Route("api/weather")]` value to `[Route("api/weather1")]` | Restart required. Old link works, new does not                             | Actual was: Old link is unavailable, new link renders        |
+| HR-05 | Multiple rapid edits        | `WeatherController.cs` | Several quick saves                                                | Hot Reload triggers consistently; no duplicate or missed reloads           |              |
 
 ### P0 — Unsupported Changes & User Feedback (UX-Critical)
 
@@ -117,8 +117,9 @@ Navigate to ```/api/weather``` to see the UI render
 
 ###  P2 — IDE Feedback & Developer Experience
 
-| ID    | Scenario                 | Area              | Observation Focus                 | Expected Result                                           |
-|-------| ------------------------ | ----------------- | --------------------------------- |-----------------------------------------------------------|
-| HR-36 | Status bar messaging     | Rider UI          | Reload success / failure messages | Clear, timely, accurate                                   |
-| HR-37 | Console logging          | Run/Debug Console | Hot Reload logs                   | Meaningfull and consistent                                |
-| HR-38 | Run vs Debug consistency | Rider             | Same change in both modes         | Behavior consistent across modes (same logs messages etc) |
+| ID    | Scenario                                               | Area              | Observation Focus                 | Expected Result                                           | Comments                                                                                   |
+|-------|--------------------------------------------------------| ----------------- |-----------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| HR-36 | Status bar messaging                                   | Rider UI          | Reload success / failure messages | Clear, timely, accurate                                   |                                                                                            |
+| HR-37 | Console logging                                        | Run/Debug Console | Hot Reload logs                   | Meaningfull and consistent                                |                                                                                            |
+| HR-38 | Run vs Debug consistency                               | Rider             | Same change in both modes         | Behavior consistent across modes (same logs messages etc) |                                                                                            |
+| HR-40 | Run from UI and `dotnet run` are having same behaviour | Rider             | Launch behaviour                  | We are getting same Hot Reload behavior in both laucnes   | In `dotnet run` I don't have the UI for Aply changes therefore Hot Reload is not appearing |
