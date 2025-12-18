@@ -36,30 +36,30 @@ Navigate to ```/api/weather``` to see the UI render
 ## Test Cases
 ### P0 — Core Hot Reload Functionality
 
-| ID    | Scenario                    | File                   | Change                                                             | Expected Result                                                            | Comments     |
-|-------| --------------------------- | ---------------------- |--------------------------------------------------------------------|----------------------------------------------------------------------------|--------------|
-| HR-01 | Method body text change     | `WeatherController.cs` | Change return string                                               | Change applied immediately without restart; browser refresh shows new text |              |
-| HR-02 | Logic change in controller  | `WeatherController.cs` | Uncomment Condiitonal logic                                        | New logic executed immediately; no state loss                              |              |
-| HR-03 | Service method logic change | `TimeService.cs`       | Modify `GetMessage()` implementation                               | Updated service logic reflected immediately                                |              |
+| ID    | Scenario                    | File                   | Change                                                            | Expected Result                                                            | Comments     |
+|-------| --------------------------- | ---------------------- |-------------------------------------------------------------------|----------------------------------------------------------------------------|--------------|
+| HR-01 | Method body text change     | `WeatherController.cs` | Change return string                                              | Change applied immediately without restart; browser refresh shows new text |              |
+| HR-02 | Logic change in controller  | `WeatherController.cs` | Uncomment Conditional logic                                       | New logic executed immediately; no state loss                              |              |
+| HR-03 | Service method logic change | `TimeService.cs`       | Modify `GetMessage()` implementation                              | Updated service logic reflected immediately                                |              |
 | HR-04 | Route change                | `WeatherController.cs` | Change `[Route("api/weather")]` value to `[Route("api/weather1")]` | Restart required. Old link works, new does not                             | Actual was: Old link is unavailable, new link renders        |
-| HR-05 | Multiple rapid edits        | `WeatherController.cs` | Several quick saves                                                | Hot Reload triggers consistently; no duplicate or missed reloads           |              |
+| HR-05 | Multiple rapid edits        | `WeatherController.cs` | Several quick saves                                               | Hot Reload triggers consistently; no duplicate or missed reloads           |              |
 
 ### P0 — Unsupported Changes & User Feedback (UX-Critical)
 
-| ID    | Scenario                   | File                   | Change                                      | Expected Result                                                                                                                                  |
-|-------|----------------------------|------------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| HR-06 | DI lifetime change         | `Program.cs`           | `AddSingleton` → `AddScoped`                | Change not applied; Message   _Program.cs(10, 42): [CS1002] ; expected_ is displayed                                                             |
-| HR-07 | Async conversion           | `WeatherController.cs` | Convert `Get()` to `async Task<string>`     | Restart required; Messsage _Making a method asynchronous requires restarting the application because is not supported by the runtime_. displayed |
-| HR-08 | Startup logic modification | `Program.cs`           | Uncomment HR-O8 line                        | No runtime effect; Rider shows that restart is required                                                                                          |
+| ID    | Scenario                             | File                   | Change                                      | Expected Result                                                                                                                                  |
+|-------|--------------------------------------|------------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| HR-06 | Dependency Injection lifetime change | `Program.cs`           | `AddSingleton` → `AddScoped`                | Change not applied; Message   _Program.cs(10, 42): [CS1002] ; expected_ is displayed                                                             |
+| HR-07 | Async conversion                     | `WeatherController.cs` | Convert `Get()` to `async Task<string>`     | Restart required; Messsage _Making a method asynchronous requires restarting the application because is not supported by the runtime_. displayed |
+| HR-08 | Startup logic modification           | `Program.cs`           | Uncomment HR-O8 line                        | No runtime effect; Rider shows that restart is required                                                                                          |
 
 ### P0 — Multi-File & Dependency Changes
 
-| ID    | Scenario                      | File(s)                                  | Change                                                | Expected Result                                                                                                               |
-|-------|-------------------------------| ---------------------------------------- |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| HR-09 | Controller + service change   | `WeatherController.cs`, `TimeService.cs` | Modify both files before save                         | Both changes applied consistently                                                                                             |
-| HR-10 | Interface contract change     | `ITimeService.cs`                        | Modify method signature                               | Reload fails or restart required; clear feedback                                                                              |
-| HR-11 | Method rename                 | `TimeService.cs`                         | Change `GetMessage()`  tp `GetMessage(string prefix)` | Error. Message   _ITimeService.cs(5, 23): [ENC0009] Updating the type of method requires restarting the application._ displayed |
-| HR-12 | Cross-file consistency        | Multiple                                 | Change dependent code                                 | No partial or stale behavior                                                                                                  |
+| ID    | Scenario                  | File(s)                                  | Change                                                | Expected Result                                                                                                               |
+|-------|---------------------------| ---------------------------------------- |-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| HR-09 | Multi file change         | `WeatherController.cs`, `TimeService.cs` | Modify both files before save                         | Both changes applied consistently                                                                                             |
+| HR-10 | Interface contract change | `ITimeService.cs`                        | Modify method signature                               | Reload fails or restart required; clear feedback                                                                              |
+| HR-11 | Method rename             | `TimeService.cs`                         | Change `GetMessage()`  tp `GetMessage(string prefix)` | Error. Message   _ITimeService.cs(5, 23): [ENC0009] Updating the type of method requires restarting the application._ displayed |
+| HR-12 | Cross-file consistency    | Multiple                                 | Change dependent code                                 | No partial or stale behavior                                                                                                  |
 
 
 ###  P1 — Stability & Recovery
@@ -96,14 +96,14 @@ Navigate to ```/api/weather``` to see the UI render
 
 ### P1 — Generics 
 
-| ID    | Scenario                        | File                    | Change Description                             | Expected Result                          |
-|-------| ------------------------------- |-------------------------| ---------------------------------------------- |------------------------------------------|
-| HR-25 | Generic method body change      | `WeatherController.cs`  | Modify logic inside a generic method           | Change applied via Hot Reload            |
-| HR-26 | Generic type parameter rename   | `GenericCalculator.cs`  | Rename generic type parameter (`T` → `TValue`) | Restart needed. Message displayed        |
-| HR-27 | Add generic constraint          | `GenericCalculator.cs`  | Add constraint (e.g. `where T : class`)        | Restart required. Message displayed      |
-| HR-28 | Remove generic constraint       | `GenericCalculator.cs`  | Remove existing constraint                     | Restart required, no crash               |
-| HR-29 | Change generic method signature | `WeatherController.cs`  | Modify generic parameters or return type       | Restart required. Message displayed      |
-| HR-30  | Generic usage change            | Consumer code           | Change how generic method/type is instantiated | Change applied, see change (if visible)  |
+| ID    | Scenario                        | File                    | Change Description                             | Expected Result                         |
+|-------| ------------------------------- |-------------------------| ---------------------------------------------- |-----------------------------------------|
+| HR-25 | Generic method body change      | `WeatherController.cs`  | Modify logic inside a generic method           | Change applied via Hot Reload           |
+| HR-26 | Generic type parameter rename   | `GenericCalculator.cs`  | Rename generic type parameter (`T` → `TValue`) | Restart needed. Message displayed       |
+| HR-27 | Add generic constraint          | `GenericCalculator.cs`  | Add constraint (e.g. `where T : class`)        | Restart required. Message displayed     |
+| HR-28 | Remove generic constraint       | `GenericCalculator.cs`  | Remove existing constraint                     | Restart required, no crash. Message displayed             |
+| HR-29 | Change generic method signature | `WeatherController.cs`  | Modify generic parameters or return type       | Restart required. Message displayed     |
+| HR-30  | Generic usage change            | Consumer code           | Change how generic method/type is instantiated | Change applied, see change (if visible) |
 
 ### P1 — Lambdas 
 
@@ -117,9 +117,9 @@ Navigate to ```/api/weather``` to see the UI render
 
 ###  P2 — IDE Feedback & Developer Experience
 
-| ID    | Scenario                                               | Area              | Observation Focus                 | Expected Result                                           | Comments                                                                                   |
-|-------|--------------------------------------------------------| ----------------- |-----------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| HR-36 | Status bar messaging                                   | Rider UI          | Reload success / failure messages | Clear, timely, accurate                                   |                                                                                            |
-| HR-37 | Console logging                                        | Run/Debug Console | Hot Reload logs                   | Meaningfull and consistent                                |                                                                                            |
-| HR-38 | Run vs Debug consistency                               | Rider             | Same change in both modes         | Behavior consistent across modes (same logs messages etc) |                                                                                            |
-| HR-40 | Run from UI and `dotnet run` are having same behaviour | Rider             | Launch behaviour                  | We are getting same Hot Reload behavior in both laucnes   | In `dotnet run` I don't have the UI for Aply changes therefore Hot Reload is not appearing |
+| ID    | Scenario                                               | Area              | Observation Focus                 | Expected Result                                            | Comments                                                                                    |
+|-------|--------------------------------------------------------| ----------------- |-----------------------------------|------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| HR-36 | Status bar messaging                                   | Rider UI          | Reload success / failure messages | Clear, timely, accurate                                    |                                                                                             |
+| HR-37 | Console logging                                        | Run/Debug Console | Hot Reload logs                   | Meaningfull and consistent                                 |                                                                                             |
+| HR-38 | Run vs Debug consistency                               | Rider             | Same change in both modes         | Behaviour consistent across modes (same logs messages etc) |                                                                                             |
+| HR-40 | Run from UI and `dotnet run` are having same behaviour | Rider             | Launch behaviour                  | We are getting same Hot Reload behaviour in both launches  | In `dotnet run` I don't have the UI for Apply changes therefore Hot Reload is not appearing |
